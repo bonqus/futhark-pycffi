@@ -113,7 +113,7 @@ class Futhark(object):
         cshape = fut_type.shape(self.ctx, data)
         shape = [cshape[i] for i in range(fut_type.rank)]
         dtype = np_types[fut_type.itemtype.item.cname]
-        result = np.zeros(shape, dtype=dtype)
+        result = np.empty(shape, dtype=dtype)
         cresult = self.ffi.cast(fut_type.itemtype, result.ctypes.data)
         fut_type.values(self.ctx, data, cresult)
         return result
